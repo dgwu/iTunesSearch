@@ -64,6 +64,7 @@ final class LandingPresenter: NSObject {
     
     private func loadSongPreviewToAudioPlayer(_ proposedSong: SongModel, fileLocation: URL) {
         self.audioPlayer?.stop()
+        guard fetchedSongs.contains(proposedSong) else { return }
         self.audioPlayer = try? AVAudioPlayer(contentsOf: fileLocation)
         guard let audioPlayer = audioPlayer else {
             view?.showApiErrorAlert(message: "Fail to play the preview song") // FIXME: add new method

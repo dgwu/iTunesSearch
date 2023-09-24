@@ -13,6 +13,7 @@ final class SongModel: Identifiable {
     let artworkUrl: String?
     let songPreviewUrl: String?
     var isPlaying: Bool = false
+    var cachedImageData: Data?
     
     init(songTitle: String, artistName: String, albumName: String, artworkUrl: String?, songPreviewUrl: String?, isPlaying: Bool = false) {
         self.songTitle = songTitle
