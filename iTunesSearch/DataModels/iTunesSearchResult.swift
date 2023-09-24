@@ -19,6 +19,6 @@ struct ITunesSearchResultItem: Codable {
     let artistId, collectionId, trackId: Int
     let artistName, collectionName, trackName, collectionCensoredName: String
     let trackCensoredName: String
-    let previewURL: String?
+    let previewUrl: String?
     let artworkUrl30, artworkUrl60, artworkUrl100: String?
 }

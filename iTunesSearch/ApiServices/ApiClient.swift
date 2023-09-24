@@ -31,6 +31,7 @@ enum ApiRequestError: Error {
     case unresolvedUrl
     case unableToDecode
     case outOfStock
+    case unableToLocateDownloadedFile
 }
 
 final class ApiClient {
@@ -66,6 +67,24 @@ final class ApiClient {
                 onComplete(.success(decodedData))
             } else {
                 onComplete(.failure(ApiRequestError.unableToDecode))
+            }
+        }.resume()
+    }
+    
+    func download(urlString: String, onComplete: @escaping (Result<URL, Error>) -> ()) {
+        guard let url = URL(string: urlString) else {
+            onComplete(.failure(ApiRequestError.unresolvedUrl))
+            return
+        }
+        URLSession.shared.downloadTask(with: url) { fileLocation, urlResponse, error in
+            if let error = error {
+                onComplete(.failure(error))
+                return
+            }
+            if let fileLocation = fileLocation {
+                onComplete(.success(fileLocation))
+            } else {
+                onComplete(.failure(ApiRequestError.unableToLocateDownloadedFile))
             }
         }.resume()
     }

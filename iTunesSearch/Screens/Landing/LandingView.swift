@@ -96,6 +96,7 @@ extension LandingView: LandingPresenterToView {
 extension LandingView: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         presenter?.didChangeSearchKeyword(keyword: searchBar.text ?? "")
+        searchBar.resignFirstResponder()
     }
 }
 

@@ -28,7 +28,7 @@ final class SongModel: Identifiable {
         self.artistName = resultItem.artistName
         self.albumName = resultItem.collectionName
         self.artworkUrl = resultItem.artworkUrl60 ?? resultItem.artworkUrl30
-        self.songPreviewUrl = resultItem.previewURL
+        self.songPreviewUrl = resultItem.previewUrl
         self.isPlaying = false
     }
 }

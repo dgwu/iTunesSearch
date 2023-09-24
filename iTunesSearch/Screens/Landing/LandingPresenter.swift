@@ -6,8 +6,9 @@
 //
 
 import Foundation
+import AVFoundation
 
-final class LandingPresenter {
+final class LandingPresenter: NSObject {
     weak var view: LandingPresenterToView?
     var apiClient = ApiClient()
     
@@ -17,6 +18,7 @@ final class LandingPresenter {
     var fetchedSongs = [SongModel]()
     var currentSeachKeyword: String = ""
     var currentPlayingSong: SongModel?
+    var audioPlayer: AVAudioPlayer?
     
     private func startNewSearch() {
         apiClient.request(iTunesSearchService.songBy(artistName: currentSeachKeyword,
@@ -54,11 +56,25 @@ final class LandingPresenter {
                     this.fetchedSongs.append(contentsOf: newSongs)
                     this.view?.reloadTableView()
                 }
-                print("dg: \(#file) \(#function), success, total \(this.fetchedSongs.count)")
-            case .failure(let error): // FIXME: add handler
-                break
+            case .failure(let error):
+                this.view?.showApiErrorAlert(message: error.localizedDescription)
             }
         }
+    }
+    
+    private func loadSongPreviewToAudioPlayer(_ proposedSong: SongModel, fileLocation: URL) {
+        self.audioPlayer = try? AVAudioPlayer(contentsOf: fileLocation)
+        guard let audioPlayer = audioPlayer else {
+            view?.showApiErrorAlert(message: "Fail to play the preview song") // FIXME: add new method
+            return
+        }
+        audioPlayer.delegate = self
+        audioPlayer.prepareToPlay()
+        audioPlayer.play()
+        proposedSong.isPlaying = true
+        currentPlayingSong = proposedSong
+        view?.reloadTableView()
+        view?.setMusicControl(isVisible: true, isPlaying: true)
     }
 }
 
@@ -96,15 +112,40 @@ extension LandingPresenter: LandingViewToPresenter {
         guard fetchedSongs.indices.contains(index) else { return }
         let tappedSong = fetchedSongs[index]
         guard tappedSong != currentPlayingSong else { return }
-        
+        audioPlayer?.stop()
         currentPlayingSong?.isPlaying = false
-        tappedSong.isPlaying = true
-        currentPlayingSong = tappedSong
         view?.reloadTableView()
-        view?.setMusicControl(isVisible: true, isPlaying: true)
+        
+        guard let previewUrlString = tappedSong.songPreviewUrl else { return }
+        apiClient.download(urlString: previewUrlString) { [weak self] (result) in
+            guard let this = self else { return }
+            
+            switch result {
+            case .success(let fileLocation):
+                this.loadSongPreviewToAudioPlayer(tappedSong, fileLocation: fileLocation)
+            case .failure(let error):
+                this.view?.setMusicControl(isVisible: false, isPlaying: false)
+                this.view?.showApiErrorAlert(message: error.localizedDescription)
+            }
+        }
+        
     }
     
-    func didTapPlayPauseButton() { // FIXME: add implementation
-        
+    func didTapPlayPauseButton() {
+        guard let audioPlayer = audioPlayer else { return }
+        if audioPlayer.isPlaying {
+            audioPlayer.pause()
+        } else {
+            audioPlayer.play()
+        }
+        view?.setMusicControl(isVisible: true, isPlaying: audioPlayer.isPlaying)
+    }
+}
+
+extension LandingPresenter: AVAudioPlayerDelegate {
+    func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
+        if flag {
+            view?.setMusicControl(isVisible: true, isPlaying: false)
+        }
     }
 }
