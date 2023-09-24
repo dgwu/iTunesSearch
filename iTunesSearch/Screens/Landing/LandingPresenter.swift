@@ -63,6 +63,7 @@ final class LandingPresenter: NSObject {
     }
     
     private func loadSongPreviewToAudioPlayer(_ proposedSong: SongModel, fileLocation: URL) {
+        self.audioPlayer?.stop()
         self.audioPlayer = try? AVAudioPlayer(contentsOf: fileLocation)
         guard let audioPlayer = audioPlayer else {
             view?.showApiErrorAlert(message: "Fail to play the preview song") // FIXME: add new method
@@ -86,11 +87,13 @@ extension LandingPresenter: LandingViewToPresenter {
     
     func didChangeSearchKeyword(keyword: String) {
         if keyword != currentSeachKeyword {
+            view?.setMusicControl(isVisible: false, isPlaying: false)
+            currentPlayingSong = nil
+            audioPlayer?.stop()
             currentSeachKeyword = keyword
             fetchedSongs.removeAll()
             view?.reloadTableView()
             startNewSearch()
-            view?.setMusicControl(isVisible: false, isPlaying: false)
         }
     }
     
@@ -98,7 +101,8 @@ extension LandingPresenter: LandingViewToPresenter {
         return self.fetchedSongs.count
     }
     
-    func getSongDetail(at index: Int) -> SongModel {
+    func getSongDetail(at index: Int) -> SongModel? {
+        guard fetchedSongs.indices.contains(index) else { return nil }
         return fetchedSongs[index]
     }
     
@@ -113,7 +117,9 @@ extension LandingPresenter: LandingViewToPresenter {
         let tappedSong = fetchedSongs[index]
         guard tappedSong != currentPlayingSong else { return }
         audioPlayer?.stop()
-        currentPlayingSong?.isPlaying = false
+        fetchedSongs.forEach { song in
+            song.isPlaying = false
+        }
         view?.reloadTableView()
         
         guard let previewUrlString = tappedSong.songPreviewUrl else { return }

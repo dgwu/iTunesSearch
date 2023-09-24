@@ -26,7 +26,7 @@ protocol LandingViewToPresenter: AnyObject {
     func viewDidLoad()
     func didChangeSearchKeyword(keyword: String)
     func getSongCount() -> Int
-    func getSongDetail(at index: Int) -> SongModel
+    func getSongDetail(at index: Int) -> SongModel?
     func didReachedEndOfTable()
     func didTapSongDetail(at index: Int)
     func didTapPlayPauseButton()
