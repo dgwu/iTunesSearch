@@ -49,9 +49,7 @@ final class LandingPresenter {
             case .success(let response):
                 this.currentSongPage += 1
                 this.isEndOfResult = response.resultCount < this.songLimitPerPage
-                if response.resultCount == .zero {
-                    this.view?.showEmptyDataState()
-                } else {
+                if response.resultCount > .zero {
                     let newSongs = response.results.map({ SongModel(from: $0) })
                     this.fetchedSongs.append(contentsOf: newSongs)
                     this.view?.reloadTableView()
