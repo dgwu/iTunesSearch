@@ -76,7 +76,7 @@ extension LandingView: LandingPresenterToView {
         }
     }
     
-    func showApiErrorAlert(message: String) {
+    func showGeneralErrorAlert(message: String) {
         DispatchQueue.main.async {
             self.showAlert(message: message, onClose: nil)
         }

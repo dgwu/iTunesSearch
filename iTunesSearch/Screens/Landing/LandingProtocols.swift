@@ -15,7 +15,7 @@ protocol LandingPresenterToView: AnyObject {
     func reloadTableView()
     func showEmptyDataState()
     func hideEmptyDataState()
-    func showApiErrorAlert(message: String)
+    func showGeneralErrorAlert(message: String)
     func setMusicControl(isVisible: Bool, isPlaying: Bool)
 }
 

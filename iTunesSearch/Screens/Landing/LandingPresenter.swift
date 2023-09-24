@@ -37,7 +37,7 @@ final class LandingPresenter: NSObject {
                     this.view?.reloadTableView()
                 }
             case .failure(let error):
-                this.view?.showApiErrorAlert(message: error.localizedDescription)
+                this.view?.showGeneralErrorAlert(message: error.localizedDescription)
             }
         }
     }
@@ -57,7 +57,7 @@ final class LandingPresenter: NSObject {
                     this.view?.reloadTableView()
                 }
             case .failure(let error):
-                this.view?.showApiErrorAlert(message: error.localizedDescription)
+                this.view?.showGeneralErrorAlert(message: error.localizedDescription)
             }
         }
     }
@@ -67,7 +67,7 @@ final class LandingPresenter: NSObject {
         guard fetchedSongs.contains(proposedSong) else { return }
         self.audioPlayer = try? AVAudioPlayer(contentsOf: fileLocation)
         guard let audioPlayer = audioPlayer else {
-            view?.showApiErrorAlert(message: "Fail to play the preview song") // FIXME: add new method
+            view?.showGeneralErrorAlert(message: "Fail to play the preview song")
             return
         }
         audioPlayer.delegate = self
@@ -132,7 +132,7 @@ extension LandingPresenter: LandingViewToPresenter {
                 this.loadSongPreviewToAudioPlayer(tappedSong, fileLocation: fileLocation)
             case .failure(let error):
                 this.view?.setMusicControl(isVisible: false, isPlaying: false)
-                this.view?.showApiErrorAlert(message: error.localizedDescription)
+                this.view?.showGeneralErrorAlert(message: error.localizedDescription)
             }
         }
         
