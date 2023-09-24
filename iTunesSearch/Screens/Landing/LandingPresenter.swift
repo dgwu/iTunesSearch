@@ -16,6 +16,7 @@ final class LandingPresenter {
     var isEndOfResult = false
     var fetchedSongs = [SongModel]()
     var currentSeachKeyword: String = ""
+    var currentPlayingSong: SongModel?
     
     private func startNewSearch() {
         apiClient.request(iTunesSearchService.songBy(artistName: currentSeachKeyword,
@@ -33,7 +34,6 @@ final class LandingPresenter {
                     this.fetchedSongs = newSongs
                     this.view?.reloadTableView()
                 }
-                print("dg: \(#file) \(#function), success, total \(this.fetchedSongs.count)")
             case .failure(let error):
                 this.view?.showApiErrorAlert(message: error.localizedDescription)
             }
@@ -74,6 +74,7 @@ extension LandingPresenter: LandingViewToPresenter {
             fetchedSongs.removeAll()
             view?.reloadTableView()
             startNewSearch()
+            view?.setMusicControl(isVisible: false, isPlaying: false)
         }
     }
     
@@ -92,6 +93,18 @@ extension LandingPresenter: LandingViewToPresenter {
     }
     
     func didTapSongDetail(at index: Int) {
-        // FIXME: add implementation
+        guard fetchedSongs.indices.contains(index) else { return }
+        let tappedSong = fetchedSongs[index]
+        guard tappedSong != currentPlayingSong else { return }
+        
+        currentPlayingSong?.isPlaying = false
+        tappedSong.isPlaying = true
+        currentPlayingSong = tappedSong
+        view?.reloadTableView()
+        view?.setMusicControl(isVisible: true, isPlaying: true)
+    }
+    
+    func didTapPlayPauseButton() { // FIXME: add implementation
+        
     }
 }

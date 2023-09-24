@@ -5,7 +5,10 @@
 //  Created by Daniel Gunawan on 24/09/23.
 //
 
-struct SongModel {
+import Foundation
+
+final class SongModel: Identifiable {
+    let id = UUID()
     let songTitle, artistName, albumName: String
     let artworkUrl: String?
     let songPreviewUrl: String?
@@ -27,5 +30,11 @@ struct SongModel {
         self.artworkUrl = resultItem.artworkUrl60 ?? resultItem.artworkUrl30
         self.songPreviewUrl = resultItem.previewURL
         self.isPlaying = false
+    }
+}
+
+extension SongModel: Equatable {
+    static func == (lhs: SongModel, rhs: SongModel) -> Bool {
+        lhs.id == rhs.id
     }
 }

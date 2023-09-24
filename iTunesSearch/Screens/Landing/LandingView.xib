@@ -11,6 +11,8 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="LandingView" customModule="iTunesSearch" customModuleProvider="target">
             <connections>
                 <outlet property="emptyStateLabel" destination="89k-ZS-vcm" id="OhO-2s-uha"/>
+                <outlet property="musicControlContainer" destination="erU-aE-b0N" id="CNL-G6-HaF"/>
+                <outlet property="musicControlPlayPauseImageView" destination="Coq-sn-Xco" id="S8h-ei-yO8"/>
                 <outlet property="searchBar" destination="gJ3-DS-uSK" id="D7j-kS-lDq"/>
                 <outlet property="songTableView" destination="dzN-mU-sPd" id="apl-X3-Odc"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -24,7 +26,7 @@
                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="R7f-VP-II4">
                     <rect key="frame" x="0.0" y="20" width="375" height="647"/>
                     <subviews>
-                        <searchBar contentMode="redraw" verticalHuggingPriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="gJ3-DS-uSK">
+                        <searchBar contentMode="redraw" verticalHuggingPriority="1000" placeholder="Artist Name" translatesAutoresizingMaskIntoConstraints="NO" id="gJ3-DS-uSK">
                             <rect key="frame" x="0.0" y="0.0" width="375" height="56"/>
                             <textInputTraits key="textInputTraits"/>
                             <connections>
@@ -41,10 +43,64 @@
                             <rect key="frame" x="0.0" y="60" width="375" height="587"/>
                             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         </tableView>
+                        <view hidden="YES" alpha="0.40000000000000002" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="erU-aE-b0N" userLabel="MusicControlContainer">
+                            <rect key="frame" x="0.0" y="647" width="375" height="86"/>
+                            <subviews>
+                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Coq-sn-Xco">
+                                    <rect key="frame" x="159.5" y="15" width="56" height="56"/>
+                                </imageView>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="fill" contentVerticalAlignment="fill" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Z6x-ja-pcW">
+                                    <rect key="frame" x="159.5" y="15" width="56" height="56"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="56" id="YuI-Ro-sc8"/>
+                                        <constraint firstAttribute="width" constant="56" id="wcA-CT-J2z"/>
+                                    </constraints>
+                                    <state key="normal" title="Button"/>
+                                    <buttonConfiguration key="configuration" style="plain"/>
+                                    <connections>
+                                        <action selector="didTapPlayPauseButton:" destination="-1" eventType="touchUpInside" id="YlT-6T-yzf"/>
+                                    </connections>
+                                </button>
+                                <button hidden="YES" opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dyT-eV-k0X">
+                                    <rect key="frame" x="71.5" y="15" width="56" height="56"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="56" id="Cab-k3-RAt"/>
+                                        <constraint firstAttribute="height" constant="56" id="vdS-8h-BAg"/>
+                                    </constraints>
+                                    <state key="normal" title="Button"/>
+                                    <buttonConfiguration key="configuration" style="plain"/>
+                                </button>
+                                <button hidden="YES" opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ohO-ia-XQr">
+                                    <rect key="frame" x="247.5" y="15" width="56" height="56"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="56" id="OkT-U2-0qy"/>
+                                        <constraint firstAttribute="width" constant="56" id="csm-in-kCO"/>
+                                    </constraints>
+                                    <state key="normal" title="Button"/>
+                                    <buttonConfiguration key="configuration" style="plain"/>
+                                </button>
+                            </subviews>
+                            <color key="backgroundColor" systemColor="placeholderTextColor"/>
+                            <constraints>
+                                <constraint firstItem="Coq-sn-Xco" firstAttribute="width" secondItem="Z6x-ja-pcW" secondAttribute="width" id="GWK-vw-ihP"/>
+                                <constraint firstItem="Coq-sn-Xco" firstAttribute="height" secondItem="Z6x-ja-pcW" secondAttribute="height" id="NC7-DM-u6r"/>
+                                <constraint firstItem="Z6x-ja-pcW" firstAttribute="leading" secondItem="dyT-eV-k0X" secondAttribute="trailing" constant="32" id="Rzw-EF-Mwm"/>
+                                <constraint firstItem="dyT-eV-k0X" firstAttribute="centerY" secondItem="Z6x-ja-pcW" secondAttribute="centerY" id="asa-9y-dkM"/>
+                                <constraint firstItem="Coq-sn-Xco" firstAttribute="centerY" secondItem="Z6x-ja-pcW" secondAttribute="centerY" id="auR-Og-LPM"/>
+                                <constraint firstItem="Z6x-ja-pcW" firstAttribute="centerY" secondItem="erU-aE-b0N" secondAttribute="centerY" id="bFO-W2-euW"/>
+                                <constraint firstItem="Z6x-ja-pcW" firstAttribute="centerX" secondItem="erU-aE-b0N" secondAttribute="centerX" id="bbN-0O-F4T"/>
+                                <constraint firstItem="ohO-ia-XQr" firstAttribute="centerY" secondItem="Z6x-ja-pcW" secondAttribute="centerY" id="c17-Vu-daZ"/>
+                                <constraint firstAttribute="height" constant="86" id="lYm-5o-Abj"/>
+                                <constraint firstItem="ohO-ia-XQr" firstAttribute="leading" secondItem="Z6x-ja-pcW" secondAttribute="trailing" constant="32" id="rDs-1c-mkc"/>
+                                <constraint firstItem="Coq-sn-Xco" firstAttribute="centerX" secondItem="Z6x-ja-pcW" secondAttribute="centerX" id="xN7-EV-z4x"/>
+                            </constraints>
+                        </view>
                     </subviews>
                     <constraints>
+                        <constraint firstItem="erU-aE-b0N" firstAttribute="leading" secondItem="R7f-VP-II4" secondAttribute="leading" id="Ara-6m-wne"/>
                         <constraint firstItem="89k-ZS-vcm" firstAttribute="leading" secondItem="R7f-VP-II4" secondAttribute="leading" constant="16" id="BwX-1p-O1m"/>
                         <constraint firstItem="dzN-mU-sPd" firstAttribute="leading" secondItem="R7f-VP-II4" secondAttribute="leading" id="L0i-0Z-94u"/>
+                        <constraint firstAttribute="trailing" secondItem="erU-aE-b0N" secondAttribute="trailing" id="UXu-BC-rXY"/>
                         <constraint firstAttribute="trailing" secondItem="89k-ZS-vcm" secondAttribute="trailing" constant="16" id="VEL-Kx-3BW"/>
                         <constraint firstAttribute="trailing" secondItem="gJ3-DS-uSK" secondAttribute="trailing" id="bVo-j5-8oi"/>
                         <constraint firstAttribute="trailing" secondItem="dzN-mU-sPd" secondAttribute="trailing" id="pPg-dP-qty"/>
@@ -64,6 +120,9 @@
         </view>
     </objects>
     <resources>
+        <systemColor name="placeholderTextColor">
+            <color red="0.23529411764705882" green="0.23529411764705882" blue="0.2627450980392157" alpha="0.29803921568627451" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

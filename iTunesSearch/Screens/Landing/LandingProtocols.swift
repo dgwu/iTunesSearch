@@ -16,6 +16,7 @@ protocol LandingPresenterToView: AnyObject {
     func showEmptyDataState()
     func hideEmptyDataState()
     func showApiErrorAlert(message: String)
+    func setMusicControl(isVisible: Bool, isPlaying: Bool)
 }
 
 // MARK: Presenter -
@@ -28,4 +29,5 @@ protocol LandingViewToPresenter: AnyObject {
     func getSongDetail(at index: Int) -> SongModel
     func didReachedEndOfTable()
     func didTapSongDetail(at index: Int)
+    func didTapPlayPauseButton()
 }

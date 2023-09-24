@@ -14,6 +14,12 @@ final class LandingView: UIViewController {
     @IBOutlet weak var songTableView: UITableView!
     @IBOutlet weak var emptyStateLabel: UILabel!
     
+    @IBOutlet weak var musicControlPlayPauseImageView: UIImageView!
+    @IBOutlet weak var musicControlContainer: UIView!
+    
+    let playIcon = UIImage(systemName: "play.circle")
+    let pauseIcon = UIImage(systemName: "pause.circle")
+    
     init() {
         super.init(nibName: String(describing: LandingView.self), bundle: Bundle(for: LandingView.self))
     }
@@ -25,6 +31,15 @@ final class LandingView: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         presenter?.viewDidLoad()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        self.navigationController?.setNavigationBarHidden(true, animated: animated)
+    }
+    
+    @IBAction func didTapPlayPauseButton(_ sender: Any) {
+        presenter?.didTapPlayPauseButton()
     }
 }
 
@@ -66,6 +81,16 @@ extension LandingView: LandingPresenterToView {
             self.showAlert(message: message, onClose: nil)
         }
     }
+    
+    func setMusicControl(isVisible: Bool, isPlaying: Bool) {
+        DispatchQueue.main.async {
+            UIView.animate(withDuration: 0.2) {
+                self.musicControlContainer.isHidden = !isVisible
+                self.musicControlPlayPauseImageView.tintColor = .gray
+                self.musicControlPlayPauseImageView.image = isPlaying ? self.pauseIcon : self.playIcon
+            }
+        }
+    }
 }
 
 extension LandingView: UISearchBarDelegate {
@@ -94,5 +119,9 @@ extension LandingView: UITableViewDelegate, UITableViewDataSource {
         if indexPath.row + 1 == presenter?.getSongCount() ?? .zero {
             presenter?.didReachedEndOfTable()
         }
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        presenter?.didTapSongDetail(at: indexPath.row)
     }
 }
