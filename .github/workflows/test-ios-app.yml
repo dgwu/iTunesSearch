@@ -1,0 +1,11 @@
+name: test-ios-app
+on:
+  push:
+    branches:
+      - 'develop'
+jobs:
+  run_test:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v2
+      - run: fastlane ios unit_test
