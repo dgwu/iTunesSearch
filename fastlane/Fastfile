@@ -22,7 +22,7 @@ platform :ios do
       clean: true,
       skip_archive: true,
       skip_codesigning: true,
-      sdk: "iOS 16.4"
+      sdk: "iOS 13.0"
     )
   end
 
