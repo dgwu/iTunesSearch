@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -55,8 +56,6 @@
                                         <constraint firstAttribute="height" constant="56" id="YuI-Ro-sc8"/>
                                         <constraint firstAttribute="width" constant="56" id="wcA-CT-J2z"/>
                                     </constraints>
-                                    <state key="normal" title="Button"/>
-                                    <buttonConfiguration key="configuration" style="plain"/>
                                     <connections>
                                         <action selector="didTapPlayPauseButton:" destination="-1" eventType="touchUpInside" id="YlT-6T-yzf"/>
                                     </connections>
@@ -68,7 +67,6 @@
                                         <constraint firstAttribute="height" constant="56" id="vdS-8h-BAg"/>
                                     </constraints>
                                     <state key="normal" title="Button"/>
-                                    <buttonConfiguration key="configuration" style="plain"/>
                                 </button>
                                 <button hidden="YES" opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ohO-ia-XQr">
                                     <rect key="frame" x="247.5" y="15" width="56" height="56"/>
@@ -77,7 +75,6 @@
                                         <constraint firstAttribute="width" constant="56" id="csm-in-kCO"/>
                                     </constraints>
                                     <state key="normal" title="Button"/>
-                                    <buttonConfiguration key="configuration" style="plain"/>
                                 </button>
                             </subviews>
                             <color key="backgroundColor" systemColor="placeholderTextColor"/>

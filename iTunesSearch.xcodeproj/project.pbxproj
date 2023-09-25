@@ -106,9 +106,9 @@
 		9167248A2AC06AAB00825724 = {
 			isa = PBXGroup;
 			children = (
-				9128CE012AC174F800453D37 /* iTunesSearchTestPlans */,
 				916724952AC06AAB00825724 /* iTunesSearch */,
 				916724AC2AC06AAE00825724 /* iTunesSearchTests */,
+				9128CE012AC174F800453D37 /* iTunesSearchTestPlans */,
 				916724942AC06AAB00825724 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -125,15 +125,15 @@
 		916724952AC06AAB00825724 /* iTunesSearch */ = {
 			isa = PBXGroup;
 			children = (
-				916724E92AC098E700825724 /* Helper */,
-				916724DD2AC07B8C00825724 /* DataModels */,
-				916724CC2AC06FED00825724 /* ApiServices */,
-				916724C62AC06C9C00825724 /* Screens */,
+				916724A42AC06AAD00825724 /* Info.plist */,
+				916724A12AC06AAD00825724 /* LaunchScreen.storyboard */,
 				916724962AC06AAB00825724 /* AppDelegate.swift */,
 				916724982AC06AAB00825724 /* SceneDelegate.swift */,
 				9167249F2AC06AAD00825724 /* Assets.xcassets */,
-				916724A12AC06AAD00825724 /* LaunchScreen.storyboard */,
-				916724A42AC06AAD00825724 /* Info.plist */,
+				916724CC2AC06FED00825724 /* ApiServices */,
+				916724DD2AC07B8C00825724 /* DataModels */,
+				916724C62AC06C9C00825724 /* Screens */,
+				916724E92AC098E700825724 /* Helper */,
 			);
 			path = iTunesSearch;
 			sourceTree = "<group>";
