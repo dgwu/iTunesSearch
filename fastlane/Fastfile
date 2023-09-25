@@ -31,7 +31,6 @@ platform :ios do
     run_tests(
       scheme: "iTunesSearch",
       parallel_testing: false,
-      devices: ["iPhone SE (3nd generation)"],
     )
   end
 end
