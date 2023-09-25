@@ -34,9 +34,12 @@ enum ApiRequestError: Error {
     case unableToLocateDownloadedFile
 }
 
-final class ApiClient {
-    public static let shared = ApiClient()
-    
+protocol ServiceClient: AnyObject {
+    func request<T: Decodable>(_ request: HttpServiceType, onComplete: @escaping (Result<T, Error>) -> ())
+    func download(urlString: String, onComplete: @escaping (Result<URL, Error>) -> ())
+}
+
+final class ApiClient: ServiceClient {
     func request<T: Decodable>(_ request: HttpServiceType, onComplete: @escaping (Result<T, Error>) -> ()) {
         guard let baseUrl = request.baseUrl,
               var urlComponent = URLComponents(url: baseUrl.appendingPathComponent(request.path), resolvingAgainstBaseURL: true) else {

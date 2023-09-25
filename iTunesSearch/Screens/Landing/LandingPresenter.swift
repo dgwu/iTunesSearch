@@ -10,7 +10,7 @@ import AVFoundation
 
 final class LandingPresenter: NSObject {
     weak var view: LandingPresenterToView?
-    var apiClient = ApiClient()
+    var apiClient: ServiceClient = ApiClient()
     
     let songLimitPerPage: Int = 20
     var currentSongPage: Int = 1

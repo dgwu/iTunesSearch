@@ -6,8 +6,23 @@
 	<dict>
 		<key>iTunesSearch.xcscheme_^#shared#^_</key>
 		<dict>
+			<key>isShown</key>
+			<true/>
 			<key>orderHint</key>
 			<integer>0</integer>
+		</dict>
+	</dict>
+	<key>SuppressBuildableAutocreation</key>
+	<dict>
+		<key>916724922AC06AAB00825724</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>916724A82AC06AAE00825724</key>
+		<dict>
+			<key>primary</key>
+			<true/>
 		</dict>
 	</dict>
 </dict>
